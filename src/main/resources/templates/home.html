@@ -1,45 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finances</title>
-    <link rel="stylesheet" href="../static/css/styles.css">
-    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/3605/3605189.png" type="image/x-icon">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="../static/js/home.js"></script>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="shortcut icon" th:href="@{https://cdn-icons-png.flaticon.com/512/3605/3605189.png}" type="image/x-icon">
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js}" 
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script th:src="@{/js/home.js}"></script>
 </head>
 <body>
     <div class="bar-tasks">
-        <button id="home" class="obj"><img src="https://cdn-icons-png.flaticon.com/256/25/25694.png"> Principal</button>
-        <button id="transactions" class="obj"><img src="https://cdn-icons-png.flaticon.com/512/570/570170.png"> Transações</button>
+        <button id="home" class="obj"><img th:src="@{https://cdn-icons-png.flaticon.com/256/25/25694.png}"> Principal</button>
+        <button id="transactions" class="obj"><img th:src="@{https://cdn-icons-png.flaticon.com/512/570/570170.png}"> Transações</button>
         <button id="mais">+</button>
-        <button id="planning" class="obj"><img src="https://cdn-icons-png.flaticon.com/512/1322/1322237.png"> Planejamento</button>
-        <button id="more" class="obj"><img src="https://cdn-icons-png.flaticon.com/512/570/570223.png    "> Mais</button>
+        <button id="planning" class="obj"><img th:src="@{https://cdn-icons-png.flaticon.com/512/1322/1322237.png}"> Planejamento</button>
+        <button id="more" class="obj"><img th:src="@{https://cdn-icons-png.flaticon.com/512/570/570223.png}"> Mais</button>
     </div>
     <div id="start">
         <navbar>
-            <button><img src="https://static.thenounproject.com/png/3192198-200.png"></button>
-            <input type="date" >
+            <button><img th:src="@{https://static.thenounproject.com/png/3192198-200.png}"></button>
+            <input type="date">
         </navbar>
         <div id="saldo-container">
             <p>Saldo em contas</p>
-            <h1 id="saldo">R$0.00</h1>
+            <h1 id="saldo" th:text="${balance}">R$0.00</h1>
             <button id="toggle-eye"><span id="eye-icon">👁️</span></button>
         </div>
         <div id="container">
             <div class="obj">
-                <img src="../static/images/positive.png">
+                <img th:src="@{/images/positive.png}">
                 <div>
                     <p>Receitas</p>
-                    <span style="color: rgb(36, 180, 36);">R$1.440,00</span>
+                    <span style="color: rgb(36, 180, 36);" th:text="${revenue}">R$1.440,00</span>
                 </div>
             </div>
             <div class="obj">
-                <img width="40px" src="../static/images/negative.png">
+                <img width="40px" th:src="@{/images/negative.png}">
                 <div>
                     <p>Despesas</p>
-                    <span style="color: rgb(232, 25, 25);">R$999,00</span>
+                    <span style="color: rgb(232, 25, 25);" th:text="${expenses}">R$999,00</span>
                 </div>
             </div>
         </div>
@@ -52,45 +53,39 @@
         <hr>
         <div class="obj">
             <p>Total</p>
-            <p>R$78,10</p>
+            <p th:text="${totalAccounts}">R$78,10</p>
         </div>
     </div>
 
-    <h2 class="title">Cartões de Credito</h2>
+    <h2 class="title">Cartões de Crédito</h2>
     <div id="cartoes">
         <div>
             <button class="default-button selected">Faturas Abertas</button>
             <button class="default-button">Faturas Fechadas</button>    
         </div>
-        <!-- LISTA DE CARTOES -->
-            <div class="cartao">
+        <!-- LISTA DE CARTÕES -->
+        <div th:each="card : ${creditCards}" class="cartao">
             <div>
-                <p id="nome">Nubank</p>
-                <p id="total-devendo">R$30,00</p>
+                <p id="nome" th:text="${card.name}">Nubank</p>
+                <p id="total-devendo" th:text="${card.totalOwed}">R$30,00</p>
             </div>
             <button class="adicionar">+</button>
-            </div>
-            <hr>
+        </div>
+        <hr>
         <div class="obj">
             <p>Total</p>
-            <p>R$78,10</p>
+            <p th:text="${totalCreditCards}">R$78,10</p>
         </div>
     </div>
     
     <h2 class="title">Despesas por Categoria</h2>
     <div id="despesas">
-        <img width="100%" src="https://cdn-icons-png.flaticon.com/512/1170/1170601.png">
-        <!-- GRAFICO PIZZA -->
+        <img width="100%" th:src="@{https://cdn-icons-png.flaticon.com/512/1170/1170601.png}">
+        <!-- GRÁFICO PIZZA -->
         <div class="obj">
-            <!-- LISTA DE DESPESAS POR CATEGORAS-->
-            <div class="categoria">
-                <p>Casa </p><p>R$10,00</p>
-            </div>
-            <div class="categoria">
-                <p>Lazer </p><p>R$1000,00</p>
-            </div>
-            <div class="categoria">
-                <p>Transporte </p><p>R$1000,00</p>
+            <!-- LISTA DE DESPESAS POR CATEGORIAS -->
+            <div th:each="expense : ${expensesByCategory}" class="categoria">
+                <p th:text="${expense.category}">Casa </p><p th:text="${expense.amount}">R$10,00</p>
             </div>
         </div>
     </div>

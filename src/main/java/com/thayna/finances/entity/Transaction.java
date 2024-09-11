@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 @Table(name = "transactions")
 public class Transaction {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,6 +15,7 @@ public class Transaction {
     private Double amount;
     private String type;
     private String date;
+    private TransactionType type; // EXPENSE ou INCOME
 
     @ManyToOne
     @JoinColumn(name = "account_id", nullable = false)

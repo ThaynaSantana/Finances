@@ -29,4 +29,8 @@ public class CreditCardService {
     public void deleteCreditCard(Long id) {
         creditCardRepository.deleteById(id);
     }
+
+    public List<CreditCard> getCreditCardsByUserId(Long userId){
+        return creditCardRepository.findByUserId(userId);
+    }
 }
