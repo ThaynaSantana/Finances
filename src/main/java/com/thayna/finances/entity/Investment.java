@@ -20,4 +20,52 @@ public class Investment {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    public void getId() {
+        return id;
+    }
+
+    public Long setId(Long id) {
+        this.id = id;
+    }
+
+    public void getAssetType() {
+        return assetType;
+    } 
+
+    public String setAssetType(String assetType) {
+        this.assetType = assetType;
+    }
+
+    public void getInvestmentCategory() {
+        return investmentCategory;
+    }
+
+    public String setInvestmentCategory(String investmentCategory){
+        this.investmentCategory = investmentCategory;
+    }
+
+    public void getTotalInvested() {
+        return totalInvested;
+    }
+
+    public Double setTotalInvested(Double totalInvested) {
+        this.totalInvested = totalInvested;
+    }
+
+    public void getFixedDate() {
+        return fixedDate;
+    }
+
+    public String setFixedDate(String fixedDate) {
+        this.fixedDate = fixedDate;
+    }
+
+    public void getYield() {
+        return yield;
+    }
+
+    public Double setYield(Double yield) {
+        this.yield = yield;
+    }
 }

@@ -41,12 +41,20 @@ public class Account {
         this.userId = userId;
     }
 
-    public BigDecimal getAmount() {
-        return amount;
+    public String getName() {
+        return name;
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public BigDecimal getbalance() {
+        return balance;
+    }
+
+    public void setbalance(BigDecimal balance) {
+        this.balance = balance;
     }
 
     public String getType() {
