@@ -21,51 +21,51 @@ public class Investment {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    public void getId() {
+    public Long getId() {
         return id;
     }
 
-    public Long setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public void getAssetType() {
+    public String getAssetType() {
         return assetType;
     } 
 
-    public String setAssetType(String assetType) {
+    public void setAssetType(String assetType) {
         this.assetType = assetType;
     }
 
-    public void getInvestmentCategory() {
+    public String getInvestmentCategory() {
         return investmentCategory;
     }
 
-    public String setInvestmentCategory(String investmentCategory){
+    public void setInvestmentCategory(String investmentCategory){
         this.investmentCategory = investmentCategory;
     }
 
-    public void getTotalInvested() {
+    public Double getTotalInvested() {
         return totalInvested;
     }
 
-    public Double setTotalInvested(Double totalInvested) {
+    public void setTotalInvested(Double totalInvested) {
         this.totalInvested = totalInvested;
     }
 
-    public void getFixedDate() {
+    public String getFixedDate() {
         return fixedDate;
     }
 
-    public String setFixedDate(String fixedDate) {
+    public void setFixedDate(String fixedDate) {
         this.fixedDate = fixedDate;
     }
 
-    public void getYield() {
+    public Double getYield() {
         return yield;
     }
 
-    public Double setYield(Double yield) {
+    public void setYield(Double yield) {
         this.yield = yield;
     }
 }

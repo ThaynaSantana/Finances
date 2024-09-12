@@ -3,6 +3,7 @@ package com.thayna.finances.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+
 @Entity
 @Data
 @Table(name = "transactions")
@@ -11,79 +12,84 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String description;
     private Double amount;
     private String type; // EXPENSE or INCOME = receita ou despesa
     private String dateOfPayment;
     private String dateOfPurchase;
     private String category;
-    private String typeExpense // debit or credit
+    private String typeExpense; // debit or credit
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 
-    public void getId() {
+    public Long getId() {
         return id;
     }
 
-    public Long setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public void getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public String setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public void getAmount(){
+    public Double getAmount() {
         return amount;
     }
 
-    public Double setAmount(Double amount){
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
-    public void getType(){
+    public String getType() {
         return type;
     }
 
-    public String setType(String type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public void getDateOfPayment() {
+    public String getDateOfPayment() {
         return dateOfPayment;
     }
 
-    public String setDateOfPayment(String dateOfPayment) {
+    public void setDateOfPayment(String dateOfPayment) {
         this.dateOfPayment = dateOfPayment;
     }
 
-    public void getDateOfPurchase() {
+    public String getDateOfPurchase() {
         return dateOfPurchase;
     }
 
-    public String setDateOfPurchase(String dateOfPurchase) {
+    public void setDateOfPurchase(String dateOfPurchase) {
         this.dateOfPurchase = dateOfPurchase;
     }
 
-    public void getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public String setCategory(String category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
-    public void getTypeExpense() {
+    public String getTypeExpense() {
         return typeExpense;
     }
 
-    public String setTypeExpense(String typeExpense) {
+    public void setTypeExpense(String typeExpense) {
         this.typeExpense = typeExpense;
     }
 }

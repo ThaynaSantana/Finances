@@ -5,6 +5,7 @@ import com.thayna.finances.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal; // Importação corrigida
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,9 @@ public class AccountService {
 
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private TransactionService transactionService;
 
     public List<Account> findAllAccounts() {
         return accountRepository.findAll();
@@ -30,30 +34,12 @@ public class AccountService {
         accountRepository.deleteById(id);
     }
 
-    public List<Account> getAccountsByUserId(Long userId){
+    public List<Account> getAccountsByUserId(Long userId) {
         return accountRepository.findByUserId(userId);
     }
 
-    public BigDecimal getTotalBalance(Long userID) {
-        List<Account> accounts = findAccountsByUserId(userId);
-        return accounts.stream()
-                .map(Account::getBalance)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    public BigDecimal getTotalBalance(Long userId) {
+        return transactionService.getTotalRevenue(userId).subtract(transactionService.getTotalExpenses(userId));
     }
 
-    public BigDecimal getTotalRevenue(Long userId) {
-        List<Account> accounts = findAccountsByUserId(userId);
-        return accounts.stream()
-                    .filter(account -> "REVENUE".equals(account.getType()))
-                    .map(Account::getAmount)
-                    .reduce(BigDecimal.ZERO, BigDecimal::add);
-    }
-
-    public BigDecimal getTotalExpenses(Long userId) {
-        List<Account> accounts = findAccountsByUserId(userId);
-        return accounts.stream()
-                    .filter(account -> "EXPENSE".equals(account.getType()))
-                    .map(Account::getAmount)
-                    .reduce(BigDecimal.ZERO, BigDecimal::add);
-    }
 }

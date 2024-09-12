@@ -1,13 +1,15 @@
 package com.thayna.finances.controller;
 
-import com.thayna.finances.model.*;
+import com.thayna.finances.entity.*;
 import com.thayna.finances.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import java.math.BigDecimal;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class HomeController {
@@ -22,7 +24,7 @@ public class HomeController {
     private CreditCardService creditCardService;
 
     @Autowired
-    private ExpenseService expenseService;
+    private TransactionService transactionService;
 
     @GetMapping("/")
     public String home(Model model) {
@@ -30,12 +32,12 @@ public class HomeController {
         User user = userService.getLoggedInUser();
 
         // Pegar saldo do usuário
-        double balance = accountService.getTotalBalance(user.getId());
+        BigDecimal balance = accountService.getTotalBalance(user.getId());
         model.addAttribute("balance", balance);
 
         // Pegar receitas e despesas
-        double revenue = accountService.getTotalRevenue(user.getId());
-        double expenses = accountService.getTotalExpenses(user.getId());
+        BigDecimal revenue = transactionService.getTotalRevenue(user.getId());
+        BigDecimal expenses = transactionService.getTotalExpenses(user.getId());
         model.addAttribute("revenue", revenue);
         model.addAttribute("expenses", expenses);
 
@@ -48,7 +50,7 @@ public class HomeController {
         model.addAttribute("creditCards", creditCards);
 
         // Listar despesas por categoria
-        List<ExpenseCategory> expensesByCategory = expenseService.getExpensesByCategory(user.getId());
+        Map<String, BigDecimal> expensesByCategory = transactionService.getExpensesByCategory(user.getId());
         model.addAttribute("expensesByCategory", expensesByCategory);
 
         return "home"; 

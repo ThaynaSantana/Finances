@@ -20,35 +20,35 @@ public class Invoice {
     @JoinColumn(name = "credit_card_id", nullable = false)
     private CreditCard creditCard;
 
-    public void getId() {
+    public Long getId() {
         return id;
     }
 
-    public Long setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public void getDueDate() {
+    public String getDueDate() {
         return dueDate;
     }
 
-    public String setDueDate(String dueDate) {
+    public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
     } 
 
-    public void getNumberOfInstallments() {
+    public int getNumberOfInstallments() {
         return numberOfInstallments;
     }
 
-    public int setNumberOfInstallments(int numberOfInstallments) {
+    public void setNumberOfInstallments(int numberOfInstallments) {
         this.numberOfInstallments = numberOfInstallments;
     }
 
-    public void getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public Double setTotal(Double total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 
@@ -57,11 +57,11 @@ public class Invoice {
         return total/numberOfInstallments;
     }
 
-    public void getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public String setStatus(String status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }

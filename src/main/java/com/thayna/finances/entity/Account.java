@@ -9,21 +9,22 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.math.BigDecimal; // Importação correta para BigDecimal
+
 @Entity
 @Data
 @Table(name = "accounts")
-
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String type;
     private String name;
-    private Double balance;
+    private BigDecimal balance;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private User user; 
 
     public Long getId() {
         return id;
@@ -31,14 +32,6 @@ public class Account {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public String getName() {
@@ -49,11 +42,11 @@ public class Account {
         this.name = name;
     }
 
-    public BigDecimal getbalance() {
+    public BigDecimal getBalance() { 
         return balance;
     }
 
-    public void setbalance(BigDecimal balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
@@ -64,5 +57,12 @@ public class Account {
     public void setType(String type) {
         this.type = type;
     }
-    
+
+    public User getUser() { 
+        return user;
+    }
+
+    public void setUser(User user) { 
+        this.user = user;
+    }
 }
