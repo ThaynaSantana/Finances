@@ -19,7 +19,7 @@ public class Transaction {
     private String dateOfPayment;
     private String dateOfPurchase;
     private String category;
-    private String typeExpense; // debit or credit
+    private String expenseType; // debit or credit
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -85,11 +85,11 @@ public class Transaction {
         this.category = category;
     }
 
-    public String getTypeExpense() {
-        return typeExpense;
+    public String getExpenseType() {
+        return expenseType;
     }
 
-    public void setTypeExpense(String typeExpense) {
-        this.typeExpense = typeExpense;
+    public void setExpenseType(String expenseType) {
+        this.expenseType = expenseType;
     }
 }
